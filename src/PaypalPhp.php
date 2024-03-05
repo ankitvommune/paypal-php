@@ -27,10 +27,11 @@ class PaypalPhp
     protected $URL_V2 = '';
     protected $OAUTH2_URL = '';
 
+   
     /**
-     * Constructor for setting up PayPal API client with provided configuration.
+     * Constructor for initializing the PayPal client.
      *
-     * @param array $config Configuration array with PayPal client ID, secret key, and type
+     * @param array $config An optional array of configuration parameters
      */
     public function __construct($config = [])
     {
@@ -40,16 +41,16 @@ class PaypalPhp
         $this->type = $config['paypal_type'] ?? $_ENV[static::PAYPAL_TYPE_ENV_NAME];
         $this->URL_V2 = $this->type == 'live' ? 'https://api-m.paypal.com/v2/' : 'https://api-m.sandbox.paypal.com/v2/';
         $this->URL_V1 = $this->type == 'live' ? 'https://api-m.paypal.com/v1/' : 'https://api-m.sandbox.paypal.com/v1/';
-        $auth = $this->oauth2Token();
+        $auth = $this->getAccessToken();
         $this->access_token = $auth->access_token;
     }
 
     /**
-     * Perform OAuth2 token request to Paypal API.
+     * Retrieves an access token from the specified URL using client credentials.
      *
-     * @return api result
+     * @return mixed
      */
-    private function oauth2Token()
+    private function getAccessToken()
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->URL_V1 . 'oauth2/token');
