@@ -1,0 +1,19 @@
+{
+    "name": "ankitvommune/paypal-php",
+    "description": "This package helps developepars in use of paypal api in php code",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ankitvommune\\PaypalPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ankitvommune",
+            "email": "ankit.verma@ommune.in"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
